@@ -2,7 +2,7 @@ import PostModel from '../models/Post.js'
 
 export const getAll = async (req, res) => {
 	try{
-		const posts = await PostModel.find().populate('user').exec()
+		const posts = await PostModel.find().sort({createdAt: 'desc'}).populate('user').exec()
 
 		res.json(posts)
 	} catch (e) {
@@ -146,9 +146,9 @@ export const update = async (req, res) => {
 
 export const getLastTags = async(req, res) => {
 	try {
-		const posts = await PostModel.find().limit(5).exec()
+		const posts = await PostModel.find().exec()
 
-		const tags = posts.map(item => item.tags).flat().slice(0, 5)
+		const tags = posts.reverse().map(item => item.tags).flat().slice(0, 5)
 
 		res.json(tags)
 	} catch (e){
