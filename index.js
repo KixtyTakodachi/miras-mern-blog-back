@@ -13,7 +13,7 @@ import { checkAuth, handleValidationErrors } from './utils/index.js'
 import {getAllByTag, getAllPopular} from "./controllers/PostController.js";
 import {addCommentToPost} from "./controllers/CommentsController.js";
 import * as fs from "fs";
-
+//FIXME db connect
 mongoose
   .connect(process.env.MONGODB_URI)
   .then( () => console.log('DB ok'))
