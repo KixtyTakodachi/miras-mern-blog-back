@@ -15,7 +15,7 @@ import {addCommentToPost} from "./controllers/CommentsController.js";
 import * as fs from "fs";
 
 mongoose
-  .connect('mongodb+srv://admin:wwwwww@cluster0.oeta1ph.mongodb.net/blog?retryWrites=true&w=majority')
+  .connect(process.env.MONGODB_URI)
   .then( () => console.log('DB ok'))
   .catch( err => console.log('DB Error', err))
 
@@ -64,7 +64,7 @@ app.post('/comments/:postId', checkAuth, commentCreateValidation, handleValidati
 app.get('/comments/:postId', CommentsController.getAllByPost)
 app.get('/comments', CommentsController.getAllComments)
 
-app.listen('4444', (err) => {
+app.listen(process.env.PORT || '4444', (err) => {
   if(err){
     return console.log(err)
   }
